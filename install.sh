@@ -17,6 +17,7 @@ sudo apt update -y
 
 sudo apt install curl -y &&
     sudo apt install git -y && \
+    sudo apt install gh -y && \
     sudo apt install vim -y && \
     sudo apt install neovim -y && \
     sudo apt install tmux
