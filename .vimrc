@@ -21,6 +21,10 @@ set t_Co=256
 set background=dark
 colorscheme desert
 
+" let's not override background (for the transparency)
+hi Normal ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
+
 " Numbering
 set number relativenumber
 
