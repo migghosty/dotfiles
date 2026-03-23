@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Miguel Meza-Ponce
+	email = miguel6886@gmail.com
+[push]
+	autoSetupRemote = true
+[core]
+	editor = vim
