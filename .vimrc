@@ -123,6 +123,9 @@ nnoremap N Nzz
 " Escape when in insert mode
 inoremap jj <esc>
 
+" amazing remmap that doesn't need a comment
+xnoremap p "_dP
+
 " Jump to previous file - not working :(
 " nnoremap <leader>p <c-6>
 
