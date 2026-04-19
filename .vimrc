@@ -13,9 +13,6 @@
 " Vim not compatible with Vi
 set nocompatible
 
-" syntax
-syntax on
-
 " Set color
 set t_Co=256
 set background=dark
@@ -53,7 +50,7 @@ set listchars=tab:→\ ,trail:·
 
 " Screen
 set scrolloff=10
-set colorcolumn=140
+set colorcolumn=100
 set nowrap
 
 " Searching
@@ -175,6 +172,9 @@ runtime! ftplugin/man.vim
 " Makefile tabs should be tabs not spaces
 autocmd FileType make setlocal noexpandtab
 
+" Trim whitespace for specific files
+autocmd BufWritePre *.py,*.c,*.cpp,*.h :%s/\s\+$//e
+
 """""""""""""""""""""""""""
 " END - PROGRAMMING
 """""""""""""""""""""""""""
@@ -199,6 +199,7 @@ Plug 'ap/vim-buftabline'
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -218,6 +219,10 @@ nnoremap <Leader>o :TagbarOpenAutoClose<CR>
 """""""""""""""""""""""""""
 " END - PLUGINS
 """""""""""""""""""""""""""
+
+" syntax (plugins don't do this automatically so let's add it after)
+syntax on
+filetype plugin indent on
 
 """""""""""""""""""""""""""
 " START - NEOVIM
