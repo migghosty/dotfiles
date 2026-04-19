@@ -153,4 +153,5 @@ PS1+="\[${WHITE}\]$: "; # displays $: for next input
 PS1+="\[${ENDCOLOR}\]"; # end color scheme
 export PS1;
 
-
+# from RUST installer
+. "$HOME/.cargo/env"
