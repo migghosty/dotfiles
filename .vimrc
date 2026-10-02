@@ -126,6 +126,8 @@ xnoremap p "_dP
 " Jump to previous file - not working :(
 " nnoremap <leader>p <c-6>
 
+nnoremap <leader>n :set number! relativenumber! list!<CR>
+
 """""""""""""""""""""""""""
 " END - SHORTCUTS
 """""""""""""""""""""""""""
@@ -187,6 +189,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
 " do the same as above but for nvim
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -245,6 +248,25 @@ set exrc    " vim checks for current working directory .vimrc
 set secure  " prevent risky commands (like shell exec) unless file is owned by ME
 
 " Ideally we want the following in the project root directory
+"
+" Auto-generate ctags on save when inside a project
+function! s:UpdateProjectTags() abort
+   " Search upward from the current file for the project marker
+   let l:marker = findfile('.proj_root', expand('%:p:h') . ';')
+   if empty(l:marker)
+      return
+   endif
+   " Directory holding the marker = project root
+   let l:root = fnamemodify(l:marker, ':p:h')
+   " Regenerate tags in the background, written to <root>/tags
+   call system('ctags -R -f ' . shellescape(l:root . '/tags')
+            \ . ' ' . shellescape(l:root) . ' &')
+endfunction
+
+augroup project_tags
+   autocmd!
+   autocmd BufWritePost * call s:UpdateProjectTags()
+augroup END
 
 " When in snapshot, run buildit
 " TODO improve it instead of just hardcoding this stuff
