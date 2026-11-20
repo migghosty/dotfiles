@@ -252,15 +252,21 @@ set secure  " prevent risky commands (like shell exec) unless file is owned by M
 " Auto-generate ctags on save when inside a project
 function! s:UpdateProjectTags() abort
    " Search upward from the current file for the project marker
-   let l:marker = findfile('.proj_root', expand('%:p:h') . ';')
-   if empty(l:marker)
-      return
-   endif
-   " Directory holding the marker = project root
-   let l:root = fnamemodify(l:marker, ':p:h')
-   " Regenerate tags in the background, written to <root>/tags
-   call system('ctags -R -f ' . shellescape(l:root . '/tags')
-            \ . ' ' . shellescape(l:root) . ' &')
+   " (.proj_root or .git)
+    let l:dir = expand('%:p:h')
+    let l:file = findfile('.proj_root', l:dir . ';')
+    if !empty(l:file)
+        let l:root = fnamemodify(l:file, ':p:h')
+    else
+        let l:git = finddir('.git', l:dir . ';')
+        if empty(l:git)
+            return
+        endif
+        let l:root = fnamemodify(l:git, ':p:h:h')
+    endif
+    " Regenerate tags in the background, written to <root>/tags
+    call system('ctags -R -f ' . shellescape(l:root . '/tags')
+                \ . ' ' . shellescape(l:root) . ' &')
 endfunction
 
 augroup project_tags
