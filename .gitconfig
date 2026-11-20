@@ -7,3 +7,7 @@
 	autoSetupRemote = true
 [core]
 	editor = vim
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
