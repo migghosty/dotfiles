@@ -282,26 +282,6 @@ augroup project_tags
    autocmd BufWritePost * call s:UpdateProjectTags()
 augroup END
 
-" When in snapshot, run buildit
-" TODO improve it instead of just hardcoding this stuff
-"nnoremap <F5> :make<CR>:!./a.out<CR>
-"nnoremap <F6> :!$SNAPSHOT/htr/target/litespeed/buildit apps.bin<CR>
-" Auto create tags file (GIT)
-"autocmd BufWritePost *.c,*.h
-"   \ if !empty($SNAPSHOT) |
-"   \  let source_path = $SNAPSHOT . "/htr/source/" |
-"   \  let tags_path = source_path . "tags" |
-"   \  silent! exe "!ctags -R -f" tags_path source_path "&" |
-"   \ endif
-
-" Auto create tags file (CLEARCASE)
-"autocmd BufWritePost *.c,*.h
-"   \ if !empty($CLEARCASE_ROOT) |
-"   \  let source_path = "/cm_data/lte/ubb_lte/apps/source/" |
-"   \  let tags_path = source_path . "tags" |
-"   \  silent! exe "!ctags -R -f" tags_path source_path "&" |
-"   \ endif
-
 """""""""""""""""""""""""""
 " END - THE END
 """""""""""""""""""""""""""
